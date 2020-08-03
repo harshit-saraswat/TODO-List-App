@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 app=express();
 
 app.set('view engine','ejs');
-app.set(express.static('static'));
 
+app.use(express.static('static'));
 app.use(bodyParser.urlencoded(
   { extended:true }
 ));
