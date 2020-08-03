@@ -90,7 +90,16 @@ input[type="text"]:focus {
 }
 
 footer {
-  color: white;
+  color: #fff;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+}
+
+a{
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+a:hover{
+  color: #00204a;
 }
