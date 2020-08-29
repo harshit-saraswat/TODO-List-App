@@ -40,17 +40,33 @@ const item3 = new Item({
 });
 
 const defaultItems=[item1,item2,item3];
-Item.insertMany(defaultItems, function (err){
-  if (err){
-      console.log(err);
-  } else{
-      console.log("Successfully saved all the items!");
-  }
-});
+// Item.insertMany(defaultItems, function (err){
+//   if (err){
+//       console.log(err);
+//   } else{
+//       console.log("Successfully saved all the items!");
+//   }
+// });
 
 app.get('/',function(req,res){
     // let day = days.getDate();
-    res.render("list",{listTitle:"ToDo List, Today",newListItems:items});
+    Item.find({},function(err,foundItems){
+
+      if(foundItems.length==0){
+        Item.insertMany(defaultItems, function (err){
+          if (err){
+              console.log(err);
+          } else{
+              console.log("Successfully saved all the items!");
+          }
+        });
+        res.redirect("/");
+      }else{
+        res.render("list",{listTitle:"ToDo List, Today",newListItems:foundItems});
+      }
+
+    });
+    
 });
 
 app.post("/",function(req, res){
