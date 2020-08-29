@@ -64,7 +64,6 @@ app.get('/',function(req,res){
       }else{
         res.render("list",{listTitle:"ToDo List, Today",newListItems:foundItems});
       }
-
     });
     
 });
@@ -73,14 +72,20 @@ app.post("/",function(req, res){
 
   let item=req.body.item;
 
-  if(req.body.list==="Work"){
-    workItems.push(item); 
-    res.redirect("/work");
-  }else{
-    items.push(item); 
-    res.redirect("/");
-  }
- 
+  // if(req.body.list==="Work"){
+  //   workItems.push(item); 
+  //   res.redirect("/work");
+  // }else{
+  //   items.push(item); 
+  //   res.redirect("/");
+  // }
+  const newItem = new Item({
+    name: item
+  });
+
+  newItem.save();
+  res.redirect("/");
+
 });
 
 app.get('/work',function(req,res){
